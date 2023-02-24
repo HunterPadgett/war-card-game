@@ -12,6 +12,8 @@ function fetchDeck() {
     localStorage.setItem("deck", deckId);
     localStorage.setItem("cpuScoreVal", 0);
     localStorage.setItem("myScoreVal", 0);
+    localStorage.setItem("myWins", 0);
+    localStorage.setItem("myLoses", 0);
     document.querySelector(".cpu-current").textContent = "0";
     document.querySelector(".my-current").textContent = "0";
     DrawCards(deckId);
@@ -91,6 +93,8 @@ function displayRoundWinner(cpuCard, myCard) {
 function endGame() {
  const winner = document.querySelector(".game-winner");
  const mySection = document.querySelector(".display");
+ const totalWins = document.querySelector(".total-wins");
+ const totalLoses = document.querySelector(".total-loses");
  mySection.style.position = "relative";
  mySection.style.top = "180px";
  winner.classList.remove("really-hidden");
@@ -98,13 +102,21 @@ function endGame() {
  document.querySelector(".play-again").classList.remove("really-hidden");
  document.querySelector(".game").classList.add("hidden");
 
- const CpuScore = Number(localStorage.getItem("cpuScoreVal"));
- const MyScore = Number(localStorage.getItem("myScoreVal"));
+ const cpuScore = Number(localStorage.getItem("cpuScoreVal"));
+ const myScore = Number(localStorage.getItem("myScoreVal"));
+ let myWinsVal = Number(localStorage.getItem("myWins"));
+ let MylosesVal = Number(localStorage.getItem("myLoses"));
 
- if (CpuScore > MyScore) {
+ if (cpuScore > myScore) {
   winner.textContent = "YOU LOST";
- } else if (CpuScore < MyScore) {
+  MylosesVal++;
+  totalLoses.innerHTML = MylosesVal;
+  localStorage.setItem("myLoses", MylosesVal);
+ } else if (cpuScore < myScore) {
   winner.textContent = "YOU WON";
+  myWinsVal++;
+  totalWins.innerHTML = myWinsVal;
+  localStorage.setItem("myWins", myWinsVal);
  } else {
   winner.textContent = "TIE GAME";
  }

@@ -64,6 +64,11 @@ i {
  /* margin-bottom: 3rem; */
 }
 
+.all-time-scores p{
+  font-size: 20px;
+  padding: 8px;
+}
+
 header,
 .game,
 .display {
