@@ -25,7 +25,7 @@ body {
 
 /* main styling */
 main {
- background-color: rgba(1, 1, 15, 0.5);
+ background-color: rgba(1, 1, 15, 0.6);
  width: 70%;
  height: 70vh;
  margin: 0 auto;
@@ -37,10 +37,31 @@ main {
 }
 
 /* header  styling */
+header {
+ display: flex;
+ justify-content: space-around;
+ align-items: center;
+}
+
+header div.all-time-scores {
+ display: flex;
+ justify-content: flex-end;
+ align-items: center;
+}
+
 header h1 {
- font-size: 80px;
+ font-size: 90px;
  margin-top: 1rem;
  margin-bottom: 2rem;
+ /* text-align: center; */
+ display: flex;
+ align-items: center;
+}
+
+i {
+ font-size: 3.5rem;
+ margin-left: 10px;
+ /* margin-bottom: 3rem; */
 }
 
 header,
@@ -87,7 +108,7 @@ header,
 
 /* card gmae area styling */
 .game {
- height: 60%;
+ height: 55%;
  display: flex;
  justify-content: space-evenly;
 }
@@ -104,7 +125,7 @@ img {
 /* main button styling */
 
 .main-button {
- height: 10%;
+ height: 15%;
  display: flex;
  justify-content: center;
  text-align: center;
@@ -113,11 +134,11 @@ img {
 
 .main-button button {
  cursor: pointer;
- font-size: 40px;
+ font-size: 35px;
  background-color: #af3aa6;
  border: 2px solid white;
  color: white;
- padding: 10px;
+ padding: 8px;
  border-radius: 8px;
  transition: all 0.15s ease-in-out;
 }
