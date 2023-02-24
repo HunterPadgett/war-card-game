@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8" />
+  <meta name="description" content="This is where your description goes" />
+  <meta name="keywords" content="one, two, three" />
+  <link
+   href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+   rel="stylesheet"
+  />
+
+  <title>Title in the tab</title>
+
+  <!-- external CSS link -->
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="css/style.css" />
+ </head>
+ <body>
+  <header>
+   <h1>War</h1>
+  </header>
+
+  <main>
+   <section class="display">
+    <div>
+     <h2 class="game-winner"></h2>
+     <button class="play-again really-hidden">play again?</button>
+    </div>
+    <div>
+     <h2 class="keep-my-score">
+      Your Score:
+      <span class="my-current"></span>
+     </h2>
+     <h2 class="keep-cpu-score">
+      CPU Score: <span class="cpu-current"></span>
+     </h2>
+    </div>
+   </section>
+
+   <section id="game" class="game hidden">
+    <div>
+     <h3>your card</h3>
+     <img src="" alt="my card" class="my-card" />
+    </div>
+    <div>
+     <h3>cpu's card</h3>
+     <img src="" alt="cpu card" class="cpu-card" />
+    </div>
+   </section>
+
+   <section class="main-button">
+    <button class="draw-button" type="button" name="button">play game</button>
+   </section>
+  </main>
+
+  <script type="text/javascript" src="index.js"></script>
+ </body>
+</html>
