@@ -48,6 +48,7 @@ function DrawCards(deckId) {
 function displayCards(data) {
  document.querySelector(".draw-button").innerHTML = "draw cards";
  document.querySelector("#game").classList.remove("hidden");
+ document.querySelector(".current-scores").classList.remove("hidden");
  const cpuCard = data.cards[0].image;
  const myCard = data.cards[1].image;
  //  console.log(cpuCard, myCard);
@@ -158,6 +159,7 @@ function playAgain() {
 function loadHighscores() {
  const totalLoses = document.querySelector(".total-loses");
  const totalWins = document.querySelector(".total-wins");
+ document.querySelector(".current-scores").classList.add("hidden");
 
  if (localStorage.getItem("myLoses")) {
   let MylosesVal = Number(localStorage.getItem("myLoses"));
