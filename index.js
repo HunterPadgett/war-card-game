@@ -4,6 +4,7 @@ document.querySelector(".play-again").addEventListener("click", playAgain);
 
 function fetchDeck() {
  let deckId = "";
+
  if (!localStorage.getItem("deck")) {
   fetch("https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
    .then((res) => (res.ok ? res.json() : new Error("something went wrong")))
@@ -12,8 +13,6 @@ function fetchDeck() {
     localStorage.setItem("deck", deckId);
     localStorage.setItem("cpuScoreVal", 0);
     localStorage.setItem("myScoreVal", 0);
-    localStorage.setItem("myWins", 0);
-    localStorage.setItem("myLoses", 0);
     document.querySelector(".cpu-current").textContent = "0";
     document.querySelector(".my-current").textContent = "0";
     DrawCards(deckId);
@@ -93,30 +92,21 @@ function displayRoundWinner(cpuCard, myCard) {
 function endGame() {
  const winner = document.querySelector(".game-winner");
  const mySection = document.querySelector(".display");
- const totalWins = document.querySelector(".total-wins");
- const totalLoses = document.querySelector(".total-loses");
  mySection.style.position = "relative";
  mySection.style.top = "180px";
  winner.classList.remove("really-hidden");
  document.querySelector(".draw-button").classList.add("hidden");
  document.querySelector(".play-again").classList.remove("really-hidden");
  document.querySelector(".game").classList.add("hidden");
-
  const cpuScore = Number(localStorage.getItem("cpuScoreVal"));
  const myScore = Number(localStorage.getItem("myScoreVal"));
- let myWinsVal = Number(localStorage.getItem("myWins"));
- let MylosesVal = Number(localStorage.getItem("myLoses"));
 
  if (cpuScore > myScore) {
   winner.textContent = "YOU LOST";
-  MylosesVal++;
-  totalLoses.innerHTML = MylosesVal;
-  localStorage.setItem("myLoses", MylosesVal);
+  storeLose();
  } else if (cpuScore < myScore) {
   winner.textContent = "YOU WON";
-  myWinsVal++;
-  totalWins.innerHTML = myWinsVal;
-  localStorage.setItem("myWins", myWinsVal);
+  storeWin();
  } else {
   winner.textContent = "TIE GAME";
  }
@@ -124,6 +114,34 @@ function endGame() {
  localStorage.removeItem("deck");
  localStorage.setItem("cpuScoreVal", 0);
  localStorage.setItem("myScoreVal", 0);
+}
+
+function storeLose() {
+ const totalLoses = document.querySelector(".total-loses");
+ if (!localStorage.getItem("myLoses")) {
+  localStorage.setItem("myLoses", 1);
+  let MylosesVal = Number(localStorage.getItem("myLoses"));
+  totalLoses.innerHTML = MylosesVal;
+ } else {
+  let MylosesVal = Number(localStorage.getItem("myLoses"));
+  MylosesVal++;
+  totalLoses.innerHTML = MylosesVal;
+  localStorage.setItem("myLoses", MylosesVal);
+ }
+}
+
+function storeWin() {
+ const totalWins = document.querySelector(".total-wins");
+ if (!localStorage.getItem("myWins")) {
+  localStorage.setItem("myWins", 1);
+  let MyWinsVal = Number(localStorage.getItem("myWins"));
+  totalWins.innerHTML = MyWinsVal;
+ } else {
+  let MyWinsVal = Number(localStorage.getItem("myWins"));
+  MyWinsVal++;
+  totalWins.innerHTML = MyWinsVal;
+  localStorage.setItem("myWins", MyWinsVal);
+ }
 }
 
 function playAgain() {
