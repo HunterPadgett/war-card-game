@@ -34,10 +34,10 @@ The game continues until one player has won all of the cards. The winner is then
 
 ### Features
 
--Play against the computer
--Track the score of each player
--View the cards played in each round
--High scores are stored locally
+-Play against the computer <br/>
+-Track the score of each player <br/>
+-View the cards played in each round <br/>
+-High scores are stored locally <br/>
 
 ## Contribution and Attribution
 
