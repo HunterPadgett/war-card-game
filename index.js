@@ -1,6 +1,7 @@
 "use strict";
 document.querySelector(".draw-button").addEventListener("click", fetchDeck);
 document.querySelector(".play-again").addEventListener("click", playAgain);
+document.addEventListener("DOMContentLoaded", loadHighscores);
 
 function fetchDeck() {
  let deckId = "";
@@ -152,4 +153,19 @@ function playAgain() {
  mySection.style.position = "";
  mySection.style.top = "";
  fetchDeck();
+}
+
+function loadHighscores() {
+ const totalLoses = document.querySelector(".total-loses");
+ const totalWins = document.querySelector(".total-wins");
+
+ if (localStorage.getItem("myLoses")) {
+  let MylosesVal = Number(localStorage.getItem("myLoses"));
+  totalLoses.innerHTML = MylosesVal;
+ }
+
+ if (localStorage.getItem("myLoses")) {
+  let MyWinsVal = Number(localStorage.getItem("myWins"));
+  totalWins.innerHTML = MyWinsVal;
+ }
 }
