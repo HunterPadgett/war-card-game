@@ -4,6 +4,9 @@ document.querySelector(".play-again").addEventListener("click", playAgain);
 document.addEventListener("DOMContentLoaded", loadHighscores);
 
 function fetchDeck() {
+ document.querySelector(".my-war-card").classList.remove("show");
+ document.querySelector(".cpu-war-card").classList.remove("show");
+ document.querySelector(".text-area").classList.remove("show");
  let deckId = "";
 
  if (!localStorage.getItem("deck")) {
@@ -16,17 +19,17 @@ function fetchDeck() {
     localStorage.setItem("myScoreVal", 0);
     document.querySelector(".cpu-current").textContent = "0";
     document.querySelector(".my-current").textContent = "0";
-    DrawCards(deckId);
+    drawCards(deckId);
    })
    .catch((err) => console.log(err));
  } else {
   const cardDeck = localStorage.getItem("deck");
   // console.log(cardDeck);
-  DrawCards(cardDeck);
+  drawCards(cardDeck);
  }
 }
 
-function DrawCards(deckId) {
+function drawCards(deckId) {
  const url = `https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`;
 
  fetch(url)
@@ -37,7 +40,6 @@ function DrawCards(deckId) {
     endGame();
    } else {
     displayCards(data);
-    convertCardValues(data);
    }
   })
   .catch((err) => {
@@ -46,49 +48,76 @@ function DrawCards(deckId) {
 }
 
 function displayCards(data) {
+ //  const cards = data.cards;
+ const cpuCard = data.cards[0];
+ const myCard = data.cards[1];
  document.querySelector(".draw-button").innerHTML = "draw cards";
  document.querySelector("#game").classList.remove("hidden");
  document.querySelector(".current-scores").classList.remove("hidden");
- const cpuCard = data.cards[0].image;
- const myCard = data.cards[1].image;
- //  console.log(cpuCard, myCard);
- document.querySelector(".cpu-card").src = cpuCard;
- document.querySelector(".my-card").src = myCard;
+ document.querySelector(".cpu-card").src = cpuCard.image;
+ document.querySelector(".my-card").src = myCard.image;
+ convertCardValues(cpuCard, myCard);
 }
 
-function convertCardValues(data) {
- const cpuCard = data.cards[0].value;
- const myCard = data.cards[1].value;
- let cpuCardValue = Number(cpuCard),
-  myCardValue = Number(myCard);
- if (cpuCard === "JACK") cpuCardValue = 11;
- if (cpuCard === "QUEEN") cpuCardValue = 12;
- if (cpuCard === "KING") cpuCardValue = 13;
- if (cpuCard === "ACE") cpuCardValue = 14;
- if (myCard === "JACK") myCardValue = 11;
- if (myCard === "QUEEN") myCardValue = 12;
- if (myCard === "KING") myCardValue = 13;
- if (myCard === "ACE") myCardValue = 14;
- //  console.log(cpuCardValue, myCardValue);
+function convertCardValues(cpuCard, myCard) {
+ const cpuCardCheck = cpuCard.value;
+ const myCardCheck = myCard.value;
+ let cpuCardValue = Number(cpuCard.value),
+  myCardValue = Number(myCard.value);
+ if (cpuCardCheck === "JACK") cpuCardValue = 11;
+ if (cpuCardCheck === "QUEEN") cpuCardValue = 12;
+ if (cpuCardCheck === "KING") cpuCardValue = 13;
+ if (cpuCardCheck === "ACE") cpuCardValue = 14;
+ if (myCardCheck === "JACK") myCardValue = 11;
+ if (myCardCheck === "QUEEN") myCardValue = 12;
+ if (myCardCheck === "KING") myCardValue = 13;
+ if (myCardCheck === "ACE") myCardValue = 14;
  displayRoundWinner(cpuCardValue, myCardValue);
 }
 
-function displayRoundWinner(cpuCard, myCard) {
+function displayRoundWinner(cpuCardValue, myCardValue) {
  let cpuScore = document.querySelector(".cpu-current");
  let myScore = document.querySelector(".my-current");
  let addToCpuScore = Number(localStorage.getItem("cpuScoreVal"));
  let addToMyScore = Number(localStorage.getItem("myScoreVal"));
 
- if (cpuCard > myCard) {
+ if (cpuCardValue > myCardValue) {
   addToCpuScore++;
   cpuScore.innerHTML = addToCpuScore;
   localStorage.setItem("cpuScoreVal", addToCpuScore);
- } else if (cpuCard < myCard) {
+ } else if (cpuCardValue < myCardValue) {
   addToMyScore++;
   myScore.innerHTML = addToMyScore;
   localStorage.setItem("myScoreVal", addToMyScore);
+ } else {
+  war();
  }
- //  console.log(cpuScore, myScore);
+}
+
+function war() {
+ const deckId = localStorage.getItem("deck");
+ const myWarDraw = document.querySelector(".my-war-card");
+ const cpuWarDraw = document.querySelector(".cpu-war-card");
+
+ document.querySelector(".text-area").classList.add("show");
+
+ setTimeout(() => {
+  fetch(`https://www.deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
+   .then((res) => (res.ok ? res.json() : new Error("something went wrong"))) // parse response as JSON
+   .then((data) => {
+    console.log(data);
+    // myWarDraw.classList.remove("really-hidden");
+    // cpuWarDraw.classList.remove("really-hidden");
+    myWarDraw.classList.add("show");
+    cpuWarDraw.classList.add("show");
+    myWarDraw.src = data.cards[0].image;
+    cpuWarDraw.src = data.cards[1].image;
+    convertCardValues(data.cards[1], data.cards[0]);
+   })
+   .catch((err) => {
+    console.log(`error ${err}`);
+   });
+ }, 500);
 }
 
 function endGame() {

@@ -64,9 +64,9 @@ i {
  /* margin-bottom: 3rem; */
 }
 
-.all-time-scores p{
-  font-size: 20px;
-  padding: 8px;
+.all-time-scores p {
+ font-size: 20px;
+ padding: 8px;
 }
 
 header,
@@ -111,20 +111,64 @@ header,
  letter-spacing: 0.7px;
 }
 
-/* card gmae area styling */
+/* card game area styling */
 .game {
  height: 55%;
  display: flex;
- justify-content: space-evenly;
+ justify-content: space-around;
 }
 
 .game h3 {
  margin-bottom: 0;
+ text-align: center;
 }
 
 img {
  height: 200px;
  margin: 20px auto;
+}
+
+.card-area {
+ display: flex;
+ flex-direction: column;
+}
+
+.my-card-area,
+.cpu-card-area {
+ position: relative;
+}
+
+.my-card-area .my-card,
+.cpu-card-area .cpu-card {
+ position: absolute;
+ left: -25px;
+}
+
+.my-war-card {
+ position: absolute;
+ z-index: 1;
+ left: 10px;
+ box-shadow: 0px 0px 20px black;
+ border-radius: 7px;
+}
+
+.cpu-war-card {
+ position: absolute;
+ z-index: 1;
+ left: -55px;
+ box-shadow: 0px 0px 20px black;
+ border-radius: 7px;
+}
+
+.war-text {
+ font-size: 40px;
+ margin-top: 60px;
+ font-weight: 600;
+}
+
+.war-text.sub-text {
+ font-size: 20px;
+ margin-top: 20px;
 }
 
 /* main button styling */
@@ -168,4 +212,13 @@ img {
 
 .really-hidden {
  display: none;
+}
+
+.fade-in {
+ opacity: 0;
+ transition: opacity 0.5s ease-in;
+}
+
+.fade-in.show {
+ opacity: 1;
 }
