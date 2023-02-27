@@ -117,7 +117,7 @@ function war() {
    .catch((err) => {
     console.log(`error ${err}`);
    });
- }, 500);
+ }, 100);
 }
 
 function endGame() {
