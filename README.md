@@ -8,6 +8,9 @@ This is a client-side implementation of the classic card game "War" using the us
 
 Deployed link: https://warcardgame-hp.netlify.app
 
+![Screenshot 2023-03-08 112026](https://user-images.githubusercontent.com/106113692/223769603-233763de-3b43-4465-a712-6e76737c5733.png)
+![Screenshot 2023-03-08 111938](https://user-images.githubusercontent.com/106113692/223769604-26f629d0-89f2-4f44-a79a-737330019142.png)
+
 ## Table of Contents
 
 - [Installation](#installation)
