@@ -6,7 +6,7 @@
 
 This is a client-side implementation of the classic card game "War" using the using Deck of Cards API, HTML, JavaScript, and CSS. The web app demonstrates how to fetch API data, utilize local storage, and render a dynamic UI so that user can play against the computer.
 
-Deployed link: warcardgame-hp.netlify.app
+Deployed link: https://warcardgame-hp.netlify.app
 
 ## Table of Contents
 
